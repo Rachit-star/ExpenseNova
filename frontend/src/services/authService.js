@@ -1,5 +1,7 @@
-const API_URL = 'http://localhost:5000/api/auth/';
+import API_BASE_URL from "../config";
+import axios from 'axios';
 
+const API_URL = `${API_BASE_URL}/api/auth/`; 
 // Helper to handle responses
 const handleResponse = async (response) => {
   const data = await response.json();
