@@ -1,0 +1,379 @@
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7); /* Darker backdrop */
+  backdrop-filter: blur(8px);
+  display: grid;
+  place-items: center;
+  z-index: 9999; /* Force top layer */
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-box {
+  width: 90%;
+  max-width: 380px;
+  padding: 32px;
+  border-radius: 24px;
+  background: #0f172a; /* Solid background ensures readability */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  z-index: 10000; /* Ensure box is above backdrop */
+  pointer-events: auto; /* Ensure clicks work */
+  animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-box h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: white;
+  text-align: center;
+  margin: 0 0 4px 0;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 15px;
+  outline: none;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.input-group input:focus {
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.color-picker-section label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #94a3b8;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.color-palette {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  background: rgba(0,0,0,0.2);
+  padding: 12px;
+  border-radius: 16px;
+}
+
+.color-swatch {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.color-swatch.active {
+  border-color: white;
+  transform: scale(1.2);
+  box-shadow: 0 0 15px var(--bg-color);
+}
+
+.modal-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Cancel Button - Darker/Ghost style */
+.btn-cancel {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #cbd5e1;
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Primary Button - Purple */
+.btn-primary {
+  padding: 12px;
+  border-radius: 12px;
+  background: #6366f1;
+  color: white;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary:hover {
+  background: #4f46e5;
+  box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  background: #334155; /* Explicit disabled grey */
+
+
+}
+
+
+/* Add this to your existing CSS */
+.type-toggle-container {
+  display: flex;
+  background: rgba(0,0,0,0.3);
+  padding: 4px;
+  border-radius: 12px;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.type-btn {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.type-btn.active-expense {
+  background: #6366f1; /* Purple */
+  color: white;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.type-btn.active-income {
+  background: #10b981; /* Green */
+  color: white;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+/* Add to existing CSS */
+.btn-delete-modal {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  padding: 12px 16px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+
+.btn-delete-modal:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
+
+/* Update actions container to space things out */
+.modal-actions {
+  display: flex;
+  justify-content: space-between; /* Pushes Delete to left, Save to right */
+  align-items: center;
+  margin-top: 16px;
+}
+/* Adjust primary button based on type context if desired, 
+   but keeping it standard purple for simplicity is fine */
+
+   /* --- EXISTING STYLES --- */
+/* (Keep your existing modal-backdrop, modal-box, inputs, etc.) */
+
+/* --- NEW: DELETE CONFIRMATION STYLES --- */
+.delete-confirm-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.warning-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(239, 68, 68, 0.1);
+  border: 2px solid #ef4444;
+  color: #ef4444;
+  font-size: 32px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.2);
+}
+
+.delete-confirm-view h3 {
+  color: white;
+  font-size: 24px;
+  margin: 0 0 12px 0;
+}
+
+.delete-confirm-view p {
+  color: #94a3b8;
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 32px;
+}
+
+.delete-confirm-view strong {
+  color: white;
+}
+
+/* SOLID RED BUTTON FOR FINAL CONFIRMATION */
+.btn-danger-solid {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+  transition: all 0.2s;
+}
+
+.btn-danger-solid:hover {
+  background: #dc2626;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+
+/* --- REMOVE UGLY NUMBER SPINNERS --- */
+
+/* For Chrome, Safari, Edge, Opera */
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* For Firefox */
+input[type=number] {
+  -moz-appearance: textfield;
+}
+
+/* Add to existing CSS */
+
+.modal-textarea {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 12px;
+  color: white;
+  font-size: 14px;
+  resize: none; /* Prevent manual resizing breaking layout */
+  font-family: inherit;
+  transition: border-color 0.2s;
+  box-sizing: border-box; /* Ensures padding doesn't overflow width */
+}
+
+.modal-textarea:focus {
+  outline: none;
+  border-color: #6366f1;
+}
+
+.modal-textarea::placeholder {
+  color: #64748b;
+}
+
+/* --- INPUT GROUPS --- */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Consistent space between label and input */
+  margin-bottom: 20px; /* Consistent space between different fields */
+  width: 100%;
+}
+
+/* --- LABELS --- */
+.input-group label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  font-weight: 700;
+  margin-left: 4px; /* Aligns visually with the input text below */
+}
+
+/* --- INPUTS & TEXTAREA --- */
+/* We target both to ensure they look exactly the same */
+.input-group input, 
+.modal-textarea {
+  width: 100%;
+  box-sizing: border-box; /* CRITICAL: Ensures padding doesn't break alignment */
+  
+  padding: 14px 16px; /* Taller, comfortable click area */
+  font-size: 16px;    /* Larger text for better readability */
+  
+  background: rgba(15, 23, 42, 0.6); /* Slightly darker than modal for depth */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+/* --- FOCUS STATE (Active) --- */
+.input-group input:focus,
+.modal-textarea:focus {
+  outline: none;
+  border-color: #6366f1; /* Indigo glow */
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); /* Subtle glow ring */
+}
+
+/* --- PLACEHOLDER TEXT --- */
+.input-group input::placeholder,
+.modal-textarea::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}

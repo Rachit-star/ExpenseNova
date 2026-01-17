@@ -1,0 +1,298 @@
+.ai-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.2s ease;
+}
+
+.ai-modal {
+  width: 90%;
+  max-width: 450px;
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  padding: 30px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.ai-header { display: flex; flex-direction: column; align-items: center; margin-bottom: 20px; }
+.ai-header h3 { margin: 0; font-size: 18px; color: #fff; font-weight: 600; }
+
+.ai-icon-pulse { font-size: 32px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+.ai-body {
+  min-height: 120px;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px; padding: 20px; margin-bottom: 20px;
+}
+
+.ai-start-view p { color: #94a3b8; font-size: 14px; margin-bottom: 15px; }
+
+.btn-analyze {
+  background: #6366f1; border: none; color: white;
+  padding: 10px 24px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+}
+.btn-analyze:hover { background: #4f46e5; transform: scale(1.05); }
+
+.ai-loading { display: flex; flex-direction: column; align-items: center; gap: 10px; color: #818cf8; font-size: 13px; }
+.loading-spinner {
+  width: 24px; height: 24px; border: 3px solid rgba(99, 102, 241, 0.3);
+  border-top-color: #6366f1; border-radius: 50%; animation: spin 1s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.ai-result p { color: #e2e8f0; font-size: 15px; line-height: 1.6; font-style: italic; }
+
+.btn-close-text { background: none; border: none; color: #64748b; font-size: 13px; cursor: pointer; }
+.btn-close-text:hover { color: #fff; text-decoration: underline; }
+
+/* Dark Theme Chat Styling */
+.ai-backdrop {
+  position: fixed;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.ai-modal.chat-mode {
+  background: #1e1e24;
+  width: 90%;
+  max-width: 450px;
+  height: 600px; /* Taller for chat */
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.ai-header {
+  padding: 15px 20px;
+  background: #2b2b36;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ai-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ai-avatar { font-size: 24px; }
+.ai-header h3 { margin: 0; font-size: 16px; color: white; }
+.ai-status { font-size: 12px; color: #10b981; }
+.btn-close-icon { background: none; border: none; color: #aaa; font-size: 24px; cursor: pointer; }
+
+/* Chat Window */
+.chat-window {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #16161a;
+}
+
+/* Bubbles */
+.chat-bubble {
+  max-width: 80%;
+  padding: 12px 16px;
+  border-radius: 18px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #e2e8f0;
+  animation: popIn 0.3s ease;
+}
+
+.ai-bubble {
+  background: #2d2d3a;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.user-bubble {
+  background: #6366f1; /* Indigo color */
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  color: white;
+}
+
+.typing { opacity: 0.5; font-style: italic; }
+
+/* Input Area */
+.chat-input-area {
+  padding: 15px;
+  background: #2b2b36;
+  display: flex;
+  gap: 10px;
+}
+
+.chat-input-area input {
+  flex: 1;
+  background: #16161a;
+  border: 1px solid rgba(255,255,255,0.1);
+  padding: 12px;
+  border-radius: 25px;
+  color: white;
+  outline: none;
+}
+
+.chat-input-area button {
+  background: #6366f1;
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+}
+
+@keyframes popIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Custom Scrollbar for Chat Window */
+.chat-window::-webkit-scrollbar {
+  width: 6px;
+}
+
+.chat-window::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.chat-window::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10px;
+}
+
+.chat-window::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.4);
+}
+/* 1. Fix the Header Layout */
+.ai-header {
+  padding: 16px 20px;
+  background: #2b2b36;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between; /* Pushes items to edges */
+  align-items: center;
+}
+
+.ai-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* 2. Style the Close Button properly */
+.btn-close-icon {
+  background: rgba(255, 255, 255, 0.05);
+  border: none;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.btn-close-icon:hover {
+  background: #f43f5e; /* Red on hover */
+}
+
+/* 3. Improve Readability in Chat */
+.chat-window {
+  flex: 1;
+  padding: 24px; /* More breathing room */
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* More space between messages */
+  background: #16161a;
+}
+
+.chat-bubble {
+  max-width: 85%;
+  padding: 14px 18px;
+  border-radius: 18px;
+  font-size: 15px; /* Bigger text */
+  line-height: 1.6; /* Better line spacing */
+  letter-spacing: 0.3px;
+  color: #e2e8f0;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.ai-bubble {
+  background: #272730;
+  align-self: flex-start;
+  border-bottom-left-radius: 4px;
+}
+
+.user-bubble {
+  background: #6366f1;
+  align-self: flex-end;
+  border-bottom-right-radius: 4px;
+  color: white;
+  font-weight: 500;
+}
+
+/* Offline Banner */
+.offline-banner {
+  background: #f43f5e;
+  color: white;
+  text-align: center;
+  padding: 8px;
+  font-size: 12px;
+  font-weight: bold;
+}
+/* Add this to your existing .chat-bubble class */
+.chat-bubble {
+  /* ... keep your existing styles ... */
+  
+  /* THIS ENABLES NEW LINES */
+  white-space: pre-wrap; 
+  word-wrap: break-word;
+}
+
+/* Style the bold text to be a nice accent color */
+.chat-bubble strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.ai-bubble strong {
+  color: #a78bfa; /* Light purple for AI bold text */
+}
+/* Crucial for readability */
+.chat-bubble br {
+  display: block;
+  content: ""; 
+  margin-top: 12px; /* Adds a nice gap between sections */
+}

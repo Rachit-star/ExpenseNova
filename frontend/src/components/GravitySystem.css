@@ -1,0 +1,319 @@
+.gravity-wrapper {
+  position: relative;
+  width: 100%;
+  height: 600px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+}
+
+.gravity-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* --- STREAMS --- */
+.stream-base {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.05);
+  stroke-width: 1;
+}
+
+.stream-flow {
+  fill: none;
+  stroke-linecap: round;
+  /* Seamless loop: 50+150=200, 1000/200=5 cycles */
+  stroke-dasharray: 50 150; 
+  stroke-dashoffset: 1000;
+  animation: flowIn linear infinite;
+  opacity: 0.9;
+}
+
+@keyframes flowIn {
+  to { stroke-dashoffset: 0; }
+}
+
+/* --- NODES --- */
+.stream-node {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transform-origin: center;
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding: 4px;
+}
+
+.stream-group:hover .stream-node {
+  transform: scale(1.1);
+  z-index: 50;
+}
+
+.node-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.node-card {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  min-width: 80px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  transition: border-color 0.2s;
+}
+
+.stream-group:hover .node-card {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(30, 41, 59, 0.8);
+}
+
+.node-name {
+  font-size: 10px;
+  color: #94a3b8;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.node-amount {
+  font-size: 14px;
+  color: white;
+  font-weight: 700;
+}
+
+/* --- CORE (UPDATED TYPOGRAPHY) --- */
+.gravity-core { cursor: default; }
+
+.core-ring {
+  fill: none;
+  stroke: rgba(99, 102, 241, 0.3);
+  stroke-width: 1;
+  opacity: 0;
+  transform-origin: center;
+  animation: rippleOut 3s linear infinite;
+  pointer-events: none;
+}
+
+.core-ring-white {
+  stroke: rgba(255, 255, 255, 0.5);
+}
+
+.delay-1 { animation-delay: 1.5s; }
+
+@keyframes rippleOut {
+  /* Scale up further to match new core size */
+  0% { transform: scale(0.8); opacity: 0.8; stroke-width: 2; }
+  100% { transform: scale(1.8); opacity: 0; stroke-width: 0; }
+}
+
+.core-label {
+  fill: #94a3b8;
+  font-size: 11px; /* Slightly bigger */
+  font-weight: 700;
+  text-anchor: middle;
+  letter-spacing: 1.5px;
+  opacity: 0.8;
+}
+
+.core-value {
+  fill: #fff;
+  font-size: 28px; /* Much bigger and bolder */
+  font-weight: 800;
+  text-anchor: middle;
+  /* Stronger glow/shadow for pop */
+  filter: drop-shadow(0 2px 12px rgba(99, 102, 241, 0.8));
+}
+
+/* --- FAB BUTTON --- */
+.gravity-fab {
+  position: absolute; bottom: 40px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #fff, #e2e8f0);
+  border: none; border-radius: 30px;
+  color: #0f172a; font-weight: 700; font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex; align-items: center; gap: 8px; z-index: 100;
+}
+.gravity-fab:hover { transform: scale(1.05) translateY(-2px); box-shadow: 0 0 40px rgba(99, 102, 241, 0.6); }
+.plus { font-size: 18px; line-height: 1; }
+
+/* --- LIMIT TOAST --- */
+.limit-toast {
+  position: absolute;
+  bottom: 100px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  backdrop-filter: blur(12px);
+  padding: 12px 20px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 200;
+}
+
+.toast-content strong {
+  display: block;
+  font-size: 13px;
+  color: white;
+}
+
+.toast-content p {
+  margin: 0;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.toast-btn {
+  background: #6366f1;
+  color: white;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.toast-btn:hover {
+  background: #4f46e5;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  color: #64748b;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 4px;
+}
+
+.toast-close:hover { color: white; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Update/Add these styles */
+
+.stream-node-wrapper {
+  position: relative; /* Anchor for the absolute tooltip */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100px; /* Adjust based on your visual preference */
+}
+
+/* --- THE NODE ITSELF --- */
+.stream-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 16px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  /* Ensure it sits above flow lines */
+  z-index: 10; 
+}
+
+.stream-node-wrapper:hover .stream-node {
+  transform: scale(1.1) translateY(-5px);
+  background: rgba(30, 41, 59, 0.95);
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* --- THE COUNT BADGE (x3) --- */
+.node-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.node-count-badge {
+  background: rgba(99, 102, 241, 0.2);
+  color: #a5b4fc;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+  line-height: 1;
+}
+
+/* --- GLASS TOOLTIP (The new UI) --- */
+.glass-tooltip {
+  position: absolute;
+  bottom: 110%; /* Sit above the node */
+  left: 50%;
+  transform: translateX(-50%) translateY(10px); /* Start slightly lower */
+  
+  width: 160px;
+  background: rgba(2, 6, 23, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 0;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  pointer-events: none; /* Let clicks pass through to the node if needed */
+  z-index: 20;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+/* Show Tooltip on Wrapper Hover */
+.stream-node-wrapper:hover .glass-tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0); /* Float up */
+}
+
+.tooltip-header {
+  padding: 10px 12px;
+  font-size: 13px;
+  color: white;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px 12px 0 0;
+}
+
+.tooltip-body {
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: #94a3b8;
+}
+
+.tooltip-row strong {
+  color: white;
+  font-weight: 600;
+}

@@ -1,0 +1,317 @@
+/* frontend/src/pages/Login.css */
+.auth-page {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(
+    circle at top left,
+    #312e81,
+    #020617 60%
+  );
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #1e293b;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  background: white;
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 24px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.5);
+  display: inline-block;
+}
+
+.auth-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin: 0 0 8px;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.auth-sub {
+  color: #64748b;
+  font-size: 14px;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.auth-error {
+  background: #fee2e2;
+  color: #dc2626;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 13px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  position: relative; /* Crucial for the eye icon positioning */
+}
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #475569;
+  margin-bottom: 8px;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 15px;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  color: #0f172a;
+  box-sizing: border-box; 
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 14px;
+  top: 38px; /* Aligns with input field */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+}
+
+.password-toggle:hover {
+  color: #6366f1;
+}
+
+.auth-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 8px;
+  border: none;
+  border-radius: 99px;
+  background: #6366f1;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.auth-btn:hover {
+  background: #4f46e5;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+}
+
+.auth-footer {
+  margin-top: 24px;
+  text-align: center;
+  font-size: 14px;
+  color: #64748b;
+}
+
+.auth-footer a {
+  color: #6366f1;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+/* Replace your .auth-card with this */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  
+  /* Glassmorphism Effect */
+  background: rgba(255, 255, 255, 0.05); /* Very transparent white */
+  backdrop-filter: blur(16px);            /* Blurs the background behind it */
+  -webkit-backdrop-filter: blur(16px);
+  
+  border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle glowing border */
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); /* Deep shadow for depth */
+}
+
+/* Update text colors to pop on dark background */
+.auth-title {
+  color: #ffffff;
+  font-size: 32px;
+  letter-spacing: -1px;
+}
+
+.auth-sub {
+  color: #94a3b8; /* Muted blue-grey */
+}
+
+.form-group label {
+  color: #cbd5e1; /* Lighter grey for labels */
+}
+
+.form-group input {
+  background: rgba(15, 23, 42, 0.6); /* Dark semi-transparent input */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+.form-group input:focus {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: #6366f1;
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+}
+
+.brand-text {
+  color: white; /* Make "Orbit" text white */
+}
+.error-toast {
+  background: rgba(239, 68, 68, 0.15); /* Red transparent bg */
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #fca5a5; /* Light red text */
+  padding: 12px 16px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.shake-animation {
+  animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translate3d(-1px, 0, 0); }
+  20%, 80% { transform: translate3d(2px, 0, 0); }
+  30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
+  40%, 60% { transform: translate3d(4px, 0, 0); }
+}
+
+/* --- Success Toast --- */
+.success-toast {
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid rgba(74, 222, 128, 0.2);
+  font-size: 14px;
+}
+
+/* --- Input Wrapper (For positioning the Eye) --- */
+.input-wrapper {
+  position: relative; /* Essential for absolute positioning of children */
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+/* Ensure password input makes room for the eye */
+.password-input {
+  width: 100%;
+  padding-right: 45px !important; /* Force space on the right */
+}
+
+/* --- Eye Button Styling --- */
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%); /* Perfect vertical centering */
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #94a3b8;
+  display: flex;
+  padding: 0;
+  transition: color 0.2s;
+}
+
+.eye-btn:hover {
+  color: #6366f1;
+}
+
+/* --- Forgot Password Link --- */
+.forgot-link-wrapper {
+  text-align: right; /* Aligns content to the right */
+  margin-top: 8px;
+}
+
+.forgot-link {
+  font-size: 13px;
+  color: #6366f1;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.forgot-link:hover {
+  color: #4f46e5;
+  text-decoration: underline;
+}
+
+/* --- Back Link (Footer) --- */
+.back-link {
+  color: #6366f1;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+/* Add these only if eye button looks broken */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.password-input {
+  width: 100%;
+  padding-right: 50px !important;
+}
+.eye-btn {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  color: #64748b;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.eye-btn:hover { color: #6366f1; }
