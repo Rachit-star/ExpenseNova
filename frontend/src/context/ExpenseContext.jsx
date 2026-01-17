@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect, useMemo } from "react";
 import { useAuth } from "./AuthContext"; 
-import API_BASE_URL from "../config"; // 👈 ADD THIS IMPORT!
+import API_BASE_URL from "../config"; // 👈 Import Config
 
 const ExpenseContext = createContext();
 
@@ -29,18 +29,14 @@ export const ExpenseProvider = ({ children }) => {
       }
 
       try {
-        // NOTE: Make sure this URL matches your backend route structure
-        // If your route is /api/data, change this. 
-        // Based on previous conversations, it might be /api/data OR /api/data/me
-        const response = await fetch(`${API_BASE_URL}/api/data`, { 
+        // ✅ CORRECTED URL: Added "/me" to match backend route
+        const response = await fetch(`${API_BASE_URL}/api/data/me`, { 
           headers: { 'Authorization': `Bearer ${token}` }
         });
         
         if (response.ok) {
           const data = await response.json();
           // Assuming backend returns { orbitData: ... } or just the data directly
-          // Adjust based on your exact backend response structure
-          // For now, I will assume the structure matches what you had:
           setOrbitData(data.orbitData || {}); 
         } 
       } catch (err) {
@@ -59,7 +55,8 @@ export const ExpenseProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      await fetch(`${API_BASE_URL}/api/data`, { // Check this route too
+      // ✅ CORRECTED URL: Added "/sync" to match backend route
+      await fetch(`${API_BASE_URL}/api/data/sync`, { 
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -87,7 +84,7 @@ export const ExpenseProvider = ({ children }) => {
     
     updatedData[currentKey] = [...currentList, {
       ...newItem,
-      id: crypto.randomUUID(), // Or use backend ID if available
+      id: crypto.randomUUID(),
       count: 1,
       date: new Date().toISOString(),
       isRecurring: newItem.isRecurring || false
@@ -106,18 +103,12 @@ export const ExpenseProvider = ({ children }) => {
     syncToCloud(newData);
   };
 
-  // 👇 RENAMED THIS to match what we used in Dashboard (deleteItem vs removeExpense)
-  // I'm keeping "removeExpense" as the name inside context but exporting it as deleteItem if needed,
-  // or you can just use removeExpense in Dashboard. Let's stick to removeExpense for consistency.
   const removeExpense = (id) => {
     const newData = {
       ...orbitData,
       [currentKey]: orbitData[currentKey].filter(i => i.id !== id && i._id !== id) // Handle both ID types
     };
     setOrbitData(newData);
-    // Also call backend delete endpoint if you implemented the specific DELETE route
-    // await fetch(`http://localhost:5000/api/data/${id}`, { method: 'DELETE', ... }) 
-    // For now, syncing the whole object works too if that's how your backend is set up.
     syncToCloud(newData);
   };
 
@@ -144,16 +135,15 @@ export const ExpenseProvider = ({ children }) => {
       }
     }
     
-    // 👇 THE FIX for "Ugly Alert"
     const limitDate = new Date(realDate);
     limitDate.setMonth(limitDate.getMonth() + 1);
     
     if (direction === 1 && newDate > limitDate) {
-      return false; // 🚫 Block navigation (Dashboard will show Toast)
+      return false; 
     }
     
     setViewDate(newDate);
-    return true; // ✅ Allow navigation
+    return true; 
   };
 
   const jumpToPresent = () => setViewDate(realDate);
@@ -193,8 +183,8 @@ export const ExpenseProvider = ({ children }) => {
   return (
     <ExpenseContext.Provider value={{
       items, orbitData, currentOrbitName: currentKey, isRealPresent, isFuture,
-      addExpense, editExpense, removeExpense, // <--- Using 'removeExpense'
-      deleteItem: removeExpense, // <--- Alias it so 'deleteItem' also works if you used that in Dashboard
+      addExpense, editExpense, removeExpense, 
+      deleteItem: removeExpense, 
       navigateMonth, jumpToPresent,
       totalExpense, totalIncome, netBalance, topExpense, averageBurn,
       mostFrequent: calculateMostFrequent(), loading
