@@ -1,28 +1,30 @@
 .modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7); /* Darker backdrop */
+  background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   display: grid;
   place-items: center;
-  z-index: 9999; /* Force top layer */
+  z-index: 9999;
   animation: fadeIn 0.2s ease-out;
 }
 
 .modal-box {
   width: 90%;
   max-width: 380px;
+  max-height: 85vh;
+  overflow-y: auto;
   padding: 32px;
   border-radius: 24px;
-  background: #0f172a; /* Solid background ensures readability */
+  background: #0f172a;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: column;
   gap: 20px;
   position: relative;
-  z-index: 10000; /* Ensure box is above backdrop */
-  pointer-events: auto; /* Ensure clicks work */
+  z-index: 10000;
+  pointer-events: auto;
   animation: scaleUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -38,31 +40,50 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
+  margin-bottom: 20px;
+  width: 100%;
 }
 
 .input-group label {
-  font-size: 12px;
-  font-weight: 600;
-  color: #94a3b8;
+  font-size: 11px;
   text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #94a3b8;
+  font-weight: 700;
+  margin-left: 4px;
 }
 
-.input-group input {
+.input-group input, 
+.modal-textarea {
   width: 100%;
-  padding: 12px 16px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: white;
-  font-size: 15px;
-  outline: none;
-  transition: all 0.2s;
   box-sizing: border-box;
+  padding: 14px 16px;
+  font-size: 16px;
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  font-family: inherit;
+  transition: all 0.2s ease;
 }
 
-.input-group input:focus {
+.input-group input:focus,
+.modal-textarea:focus {
+  outline: none;
   border-color: #6366f1;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(15, 23, 42, 0.9);
+  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+}
+
+.input-group input::placeholder,
+.modal-textarea::placeholder {
+  color: rgba(148, 163, 184, 0.5);
+}
+
+.modal-textarea {
+  resize: none;
+  font-family: inherit;
+  transition: border-color 0.2s;
 }
 
 .color-picker-section label {
@@ -103,13 +124,13 @@
 }
 
 .modal-actions {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 16px;
   gap: 12px;
-  margin-top: 12px;
 }
 
-/* Cancel Button - Darker/Ghost style */
 .btn-cancel {
   padding: 12px;
   border-radius: 12px;
@@ -126,7 +147,6 @@
   color: white;
 }
 
-/* Primary Button - Purple */
 .btn-primary {
   padding: 12px;
   border-radius: 12px;
@@ -147,13 +167,9 @@
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none;
-  background: #334155; /* Explicit disabled grey */
-
-
+  background: #334155;
 }
 
-
-/* Add this to your existing CSS */
 .type-toggle-container {
   display: flex;
   background: rgba(0,0,0,0.3);
@@ -176,18 +192,17 @@
 }
 
 .type-btn.active-expense {
-  background: #6366f1; /* Purple */
+  background: #6366f1;
   color: white;
   box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
 }
 
 .type-btn.active-income {
-  background: #10b981; /* Green */
+  background: #10b981;
   color: white;
   box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
-/* Add to existing CSS */
 .btn-delete-modal {
   background: rgba(239, 68, 68, 0.1);
   color: #ef4444;
@@ -204,20 +219,6 @@
   color: #f87171;
 }
 
-/* Update actions container to space things out */
-.modal-actions {
-  display: flex;
-  justify-content: space-between; /* Pushes Delete to left, Save to right */
-  align-items: center;
-  margin-top: 16px;
-}
-/* Adjust primary button based on type context if desired, 
-   but keeping it standard purple for simplicity is fine */
-
-   /* --- EXISTING STYLES --- */
-/* (Keep your existing modal-backdrop, modal-box, inputs, etc.) */
-
-/* --- NEW: DELETE CONFIRMATION STYLES --- */
 .delete-confirm-view {
   display: flex;
   flex-direction: column;
@@ -260,7 +261,6 @@
   color: white;
 }
 
-/* SOLID RED BUTTON FOR FINAL CONFIRMATION */
 .btn-danger-solid {
   background: #ef4444;
   color: white;
@@ -283,97 +283,18 @@
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-@keyframes scaleUp { from { opacity: 0; transform: scale(0.95) translateY(10px); } to { opacity: 1; transform: scale(1) translateY(0); } }
 
-/* --- REMOVE UGLY NUMBER SPINNERS --- */
+@keyframes scaleUp { 
+  from { opacity: 0; transform: scale(0.95) translateY(10px); } 
+  to { opacity: 1; transform: scale(1) translateY(0); } 
+}
 
-/* For Chrome, Safari, Edge, Opera */
 input[type=number]::-webkit-outer-spin-button,
 input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
 
-/* For Firefox */
 input[type=number] {
   -moz-appearance: textfield;
-}
-
-/* Add to existing CSS */
-
-.modal-textarea {
-  width: 100%;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 12px;
-  color: white;
-  font-size: 14px;
-  resize: none; /* Prevent manual resizing breaking layout */
-  font-family: inherit;
-  transition: border-color 0.2s;
-  box-sizing: border-box; /* Ensures padding doesn't overflow width */
-}
-
-.modal-textarea:focus {
-  outline: none;
-  border-color: #6366f1;
-}
-
-.modal-textarea::placeholder {
-  color: #64748b;
-}
-
-/* --- INPUT GROUPS --- */
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* Consistent space between label and input */
-  margin-bottom: 20px; /* Consistent space between different fields */
-  width: 100%;
-}
-
-/* --- LABELS --- */
-.input-group label {
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: #94a3b8;
-  font-weight: 700;
-  margin-left: 4px; /* Aligns visually with the input text below */
-}
-
-/* --- INPUTS & TEXTAREA --- */
-/* We target both to ensure they look exactly the same */
-.input-group input, 
-.modal-textarea {
-  width: 100%;
-  box-sizing: border-box; /* CRITICAL: Ensures padding doesn't break alignment */
-  
-  padding: 14px 16px; /* Taller, comfortable click area */
-  font-size: 16px;    /* Larger text for better readability */
-  
-  background: rgba(15, 23, 42, 0.6); /* Slightly darker than modal for depth */
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  color: white;
-  
-  font-family: inherit;
-  transition: all 0.2s ease;
-}
-
-/* --- FOCUS STATE (Active) --- */
-.input-group input:focus,
-.modal-textarea:focus {
-  outline: none;
-  border-color: #6366f1; /* Indigo glow */
-  background: rgba(15, 23, 42, 0.9);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15); /* Subtle glow ring */
-}
-
-/* --- PLACEHOLDER TEXT --- */
-.input-group input::placeholder,
-.modal-textarea::placeholder {
-  color: rgba(148, 163, 184, 0.5);
 }
