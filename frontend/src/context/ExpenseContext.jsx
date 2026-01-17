@@ -59,7 +59,7 @@ export const ExpenseProvider = ({ children }) => {
     if (!token) return;
 
     try {
-      await fetch(`${API_BASE_URL}/api/data/sync`, { // Check this route too
+      await fetch(`${API_BASE_URL}/api/data`, { // Check this route too
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
