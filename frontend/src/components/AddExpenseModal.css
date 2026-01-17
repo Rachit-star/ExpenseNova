@@ -12,8 +12,10 @@
 .modal-box {
   width: 90%;
   max-width: 380px;
-  max-height: 85vh;
+  /* Safety net: allow scroll ONLY if physically impossible to fit */
+  max-height: 95vh; 
   overflow-y: auto;
+  
   padding: 32px;
   border-radius: 24px;
   background: #0f172a;
@@ -297,4 +299,64 @@ input[type=number]::-webkit-inner-spin-button {
 
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+/* --- AUTO-SHRINK FOR SMALL SCREENS --- */
+@media (max-height: 750px) {
+  .modal-box {
+    padding: 16px;
+    gap: 10px;
+    width: 95%;
+  }
+
+  .modal-box h3 {
+    font-size: 16px;
+    margin: 0;
+  }
+
+  .input-group {
+    margin-bottom: 8px;
+    gap: 4px;
+  }
+
+  .input-group label, 
+  .color-picker-section label {
+    margin-bottom: 2px;
+    font-size: 10px;
+  }
+
+  .input-group input, 
+  .modal-textarea {
+    padding: 8px 12px;
+    font-size: 14px;
+    border-radius: 8px;
+  }
+  
+  .type-toggle-container {
+    padding: 2px;
+    margin-bottom: 8px;
+  }
+
+  .type-btn {
+    padding: 6px;
+    font-size: 13px;
+  }
+
+  .color-palette {
+    padding: 8px;
+  }
+
+  .color-swatch {
+    width: 24px;
+    height: 24px;
+  }
+
+  .btn-primary, .btn-cancel, .btn-delete-modal {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .modal-actions {
+    margin-top: 8px;
+  }
 }
